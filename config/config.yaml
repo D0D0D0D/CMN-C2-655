@@ -1,0 +1,45 @@
+# Runtime parameters loaded by AgentRegistry and passed to Graph(config=...).
+max_retry: 3
+timeout_seconds: 60
+memory_enabled: true
+hitl:
+  enabled: true
+  # Safety valve only; template users can tune this for their cost tolerance.
+  max_hitl: 24
+plans_count: 3
+llm:
+  model: "claude-sonnet"
+  temperature: 0.2
+  max_tokens: 4000
+web_search:
+  max_retries: 2
+  timeout_seconds: 10
+ingest:
+  max_rows_per_call: 500
+
+# SDK QdrantVectorStore. Disabled preserves DB persistence while the optional
+# past-trip KB remains unavailable. Connection values are secrets, not config.
+vector_store:
+  enabled: false
+  collection_name: "cmn_c2_655_trip_kb"
+  namespace: "cmn"
+  agent_name: "cmn_c2_655"
+  vector_size: 1536
+  distance: "cosine"
+  timeout_s: 30
+  write_timeout_s: 60
+  max_batch_documents: 1000
+  max_top_k: 100
+
+# Must match vector_store.vector_size. Endpoint, credential, and deployment
+# name are resolved from SecretProvider when vector_store.enabled is true.
+embedding:
+  api_version: "2024-02-15-preview"
+  dimensions: 1536
+  provider: "azure"
+  timeout_s: 30
+  batch_size: 16
+  max_retries: 5
+  base_delay: 1.0
+  max_delay: 60.0
+  max_cache_size: 10000

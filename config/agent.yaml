@@ -1,0 +1,27 @@
+# Agent Manifest — AgentRegistry entry point
+# AgentRegistry reads these keys at the root level.
+id: "CMN-C2-655"
+name: "CorporateGroupTripPlannerAgent"
+namespace: "cmn"
+version: "1.0.0"
+enabled: true
+category: "Cat 2"
+generation_mode: "llm"
+industry: "CMN"
+
+# Opaque compatibility metadata.
+base_type: "AgentBaseGraph"
+
+# Entry point — a single dotted import path.
+class: "src.graph.graph.CorporateGroupTripPlannerGraph"
+
+# Security and compile-time dependency gates.
+required_trust_level: "VERIFIED_EXTERNAL"
+requires:
+  secrets:
+    - TRIP_DB_URL
+    - TRIP_KB_QDRANT_URL
+    - TRIP_KB_EMBEDDING_API_KEY
+    - TRIP_KB_EMBEDDING_ENDPOINT
+    - TRIP_KB_EMBEDDING_DEPLOYMENT
+  extras: []
